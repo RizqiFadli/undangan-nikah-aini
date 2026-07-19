@@ -8,20 +8,22 @@ export interface BankAccount {
 }
 
 export interface WeddingData {
-  groom: {
-    name: string;
-    fullName: string;
-    parents: string;
-    instagram?: string;
-  };
   bride: {
     name: string;
     fullName: string;
     parents: string;
     instagram?: string;
+    photo: string;
+  };
+  groom: {
+    name: string;
+    fullName: string;
+    parents: string;
+    instagram?: string;
+    photo: string;
   };
   event: {
-    date: string; // format ISO: "2026-09-20T09:00:00" — dipakai untuk countdown & format hari/tanggal
+    date: string; // format ISO: "2026-09-20T09:00:00"
     akadTime: string;
     resepsiTime: string;
     ramahTamahTime: string;
@@ -30,8 +32,9 @@ export interface WeddingData {
     venue: string;
     address: string;
     mapsUrl: string;
-    mapsEmbedUrl: string;
+    mapsEmbedUrl: string; // untuk iframe embed
   };
+  gallery: string[];
   bankAccounts: BankAccount[];
   music: {
     src: string;
@@ -45,23 +48,25 @@ export interface WeddingData {
 }
 
 export const weddingData: WeddingData = {
-  groom: {
-    name: "Musyafa'",
-    fullName: "Musyafa' Lengkap",
-    parents: "Putra dari Bapak ... & Ibu ...",
-    instagram: "@username_pria",
-  },
   bride: {
     name: "Aini",
-    fullName: "Aini Lengkap",
-    parents: "Putri dari Bapak ... & Ibu ...",
-    instagram: "@username_wanita",
+    fullName: "Nur Ainiyatur Rochmah",
+    parents: "Putri dari Bapak Muhyidin & Ibu Karyi",
+    instagram: "@ainiyatur_r",
+    photo: "/images/bride.jpg",
+  },
+  groom: {
+    name: "Musyafa'",
+    fullName: "Muhammad Musyafa'",
+    parents: "Putra dari Bapak Diyono & Ibu Malikhah",
+    instagram: "@muhammasyaf",
+    photo: "/images/groom.jpg",
   },
   event: {
-    date: "2026-09-20T09:00:00",
-    akadTime: "08:00 - 09:00 WIB",
-    resepsiTime: "11:00 - 14:00 WIB",
-    ramahTamahTime: "14:00 - 16:00 WIB",
+    date: "2026-09-20T12:00:00",
+    akadTime: "07:00 WIB",
+    resepsiTime: "10:00 - 12:00 WIB",
+    ramahTamahTime: "12:00 - 14:00 WIB",
   },
   location: {
     venue: "Rumah mempelai wanita",
@@ -70,13 +75,19 @@ export const weddingData: WeddingData = {
     mapsEmbedUrl:
       "https://www.google.com/maps?q=-6.9498755,109.5201137&z=17&output=embed",
   },
+  gallery: [
+    "/images/gallery/1.jpg",
+    "/images/gallery/2.jpg",
+    "/images/gallery/3.jpg",
+    "/images/gallery/4.jpg",
+  ],
   bankAccounts: [
-    { bank: "BCA", number: "1234567890", name: "Musyafa'" },
-    { bank: "Mandiri", number: "0987654321", name: "Aini" },
+    { bank: "BRI", number: "006801031948536", name: "Muhammad Musyafa" },
+    { bank: "Shopeepay", number: "085643589320", name: "" },
   ],
   music: {
     src: "/music/backsound.mp3",
-    title: "Judul Lagu - Penyanyi",
+    title: "Terpukau - Astrid",
   },
   quote: {
     arabic:
@@ -88,13 +99,16 @@ export const weddingData: WeddingData = {
 };
 
 // Helper untuk format hari & tanggal dalam Bahasa Indonesia
-// Contoh output: "Minggu, 20 September 2026"
+// Pakai "Ahad" (bukan "Minggu") sesuai istilah umum di undangan pernikahan Islami
+// Contoh output: "Ahad, 20 September 2026"
 export function formatEventDayDate(isoDate: string): string {
   const date = new Date(isoDate);
-  return new Intl.DateTimeFormat("id-ID", {
+  const formatted = new Intl.DateTimeFormat("id-ID", {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(date);
+
+  return formatted.replace("Minggu", "Ahad");
 }

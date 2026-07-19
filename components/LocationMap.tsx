@@ -19,7 +19,7 @@ export default function LocationMap() {
     {
       label: "Resepsi",
       time: event.resepsiTime,
-      desc: "Ramah tamah bersama keluarga & tamu undangan",
+      desc: "Penerimaan tamu undangan oleh kedua mempelai",
     },
     {
       label: "Ramah Tamah",
@@ -76,14 +76,13 @@ export default function LocationMap() {
                 Pukul
               </span>
               <span className="mt-0.5 font-serif text-sm font-semibold text-[#F5E6DA]">
-                {item.time.split(" - ")[0]}
+                {item.time.replace(" WIB", "").split(" - ")[0].trim()}
               </span>
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-[#F5E6DA]">
                 {item.label}
               </p>
-              <p className="mt-0.5 text-xs text-[#F5E6DA]/70">{item.time}</p>
               <p className="mt-1 text-xs leading-relaxed text-[#F5E6DA]/60">
                 {item.desc}
               </p>

@@ -76,9 +76,11 @@ export default function GiftSection() {
                   <p className="mt-1 font-serif text-lg tracking-wide">
                     {account.number}
                   </p>
-                  <p className="mt-0.5 text-xs text-[#F5E6DA]/60">
-                    {account.name}
-                  </p>
+                  {account.name && (
+                    <p className="mt-0.5 text-xs text-[#F5E6DA]/60">
+                      a.n. {account.name}
+                    </p>
+                  )}
                 </div>
 
                 <button
