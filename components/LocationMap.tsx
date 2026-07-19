@@ -2,11 +2,31 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { weddingData } from "@/data/weddingData";
+import { weddingData, formatEventDayDate } from "@/data/weddingData";
 
 export default function LocationMap() {
   const { location, event } = weddingData;
   const [copied, setCopied] = useState(false);
+
+  const dayDate = formatEventDayDate(event.date);
+
+  const schedule = [
+    {
+      label: "Akad Nikah",
+      time: event.akadTime,
+      desc: "Prosesi ijab qabul kedua mempelai",
+    },
+    {
+      label: "Resepsi",
+      time: event.resepsiTime,
+      desc: "Ramah tamah bersama keluarga & tamu undangan",
+    },
+    {
+      label: "Ramah Tamah",
+      time: event.ramahTamahTime,
+      desc: "Sesi foto bersama & jamuan santai",
+    },
+  ];
 
   const handleCopyAddress = async () => {
     try {
@@ -25,35 +45,54 @@ export default function LocationMap() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.7 }}
-        className="mb-8 flex flex-col items-center text-center"
+        className="mb-2 flex flex-col items-center text-center"
       >
         <p className="text-xs uppercase tracking-[0.3em] text-[#8A1F35]/70">
-          Lokasi Acara
+          Waktu &amp; Lokasi Acara
         </p>
         <h2 className="mt-2 font-script text-5xl text-[#8A1F35]">
           {location.venue}
         </h2>
+        <p className="mt-3 text-sm font-medium text-[#4A1220]/80">
+          {dayDate}
+        </p>
       </motion.div>
 
+      {/* Rundown acara */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.7, delay: 0.1 }}
-        className="mx-auto mb-8 flex max-w-md flex-col gap-3 sm:flex-row sm:justify-center sm:gap-6"
+        className="mx-auto mb-8 mt-6 flex max-w-md flex-col gap-3"
       >
-        <div className="flex-1 rounded-xl border border-[#C9A875] bg-[#5D1523] px-5 py-4 text-center">
-          <p className="text-xs uppercase tracking-wide text-[#C9A875]">Akad</p>
-          <p className="mt-1 text-sm text-[#F5E6DA]">{event.akadTime}</p>
-        </div>
-        <div className="flex-1 rounded-xl border border-[#C9A875] bg-[#5D1523] px-5 py-4 text-center">
-          <p className="text-xs uppercase tracking-wide text-[#C9A875]">
-            Resepsi
-          </p>
-          <p className="mt-1 text-sm text-[#F5E6DA]">{event.resepsiTime}</p>
-        </div>
+        {schedule.map((item) => (
+          <div
+            key={item.label}
+            className="flex items-start gap-4 rounded-xl border border-[#C9A875] bg-[#5D1523] px-5 py-4"
+          >
+            <div className="flex min-w-[64px] flex-col items-center border-r border-[#C9A875]/40 pr-4 text-center">
+              <span className="text-[10px] uppercase tracking-wide text-[#C9A875]">
+                Pukul
+              </span>
+              <span className="mt-0.5 font-serif text-sm font-semibold text-[#F5E6DA]">
+                {item.time.split(" - ")[0]}
+              </span>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-[#F5E6DA]">
+                {item.label}
+              </p>
+              <p className="mt-0.5 text-xs text-[#F5E6DA]/70">{item.time}</p>
+              <p className="mt-1 text-xs leading-relaxed text-[#F5E6DA]/60">
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        ))}
       </motion.div>
 
+      {/* Embed peta */}
       <motion.div
         initial={{ opacity: 0, scale: 0.97 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -72,6 +111,7 @@ export default function LocationMap() {
         />
       </motion.div>
 
+      {/* Alamat + aksi */}
       <div className="mx-auto mt-5 flex max-w-md flex-col items-center gap-4 text-center">
         <p className="text-sm text-[#4A1220]/80">{location.address}</p>
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "next/navigation";
-import { weddingData } from "@/data/weddingData";
+import { weddingData, formatEventDayDate } from "@/data/weddingData";
 import { FloralBouquet } from "@/components/FloralOrnament";
 
 interface CoverScreenProps {
@@ -84,6 +84,10 @@ export default function CoverScreen({ onOpen }: CoverScreenProps) {
               <h1 className="font-script text-6xl leading-tight text-[#F5E6DA]">
                 {weddingData.groom.name}
               </h1>
+
+              <p className="mt-4 text-xs font-medium uppercase tracking-[0.2em] text-[#C9A875]">
+                {formatEventDayDate(weddingData.event.date)}
+              </p>
 
               <div className="mt-6 h-px w-16 bg-[#C9A875]/60" />
 
