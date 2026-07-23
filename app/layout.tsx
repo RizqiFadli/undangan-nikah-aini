@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans, Great_Vibes } from "next/font/google";
+import { SITE_URL } from "@/lib/config";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -20,8 +21,6 @@ const greatVibes = Great_Vibes({
   variable: "--font-script-raw",
   weight: ["400"],
 });
-
-const SITE_URL = "https://undangannikah-aini-musyafa.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
