@@ -5,29 +5,10 @@ import { weddingData } from "@/data/weddingData";
 import { FloralBouquet, FloralSprig } from "@/components/FloralOrnament";
 
 export default function CoupleProfile() {
-  const { groom, bride, quote } = weddingData;
+  const { groom, bride } = weddingData;
 
   return (
     <section className="relative flex flex-col items-center gap-10 overflow-hidden bg-[#FDEEF0] px-6 py-16 text-[#4A1220]">
-      {/* Ayat pembuka */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7 }}
-        className="max-w-md text-center"
-      >
-        <p dir="rtl" className="mb-4 font-serif text-xl leading-loose text-[#8A1F35]">
-          {quote.arabic}
-        </p>
-        <p className="text-sm italic leading-relaxed text-[#4A1220]/80">
-          &ldquo;{quote.translation}&rdquo;
-        </p>
-        <p className="mt-2 text-xs uppercase tracking-[0.25em] text-[#C9A875]">
-          {quote.source}
-        </p>
-      </motion.div>
-
       <FloralBouquet className="h-16 w-16 rotate-180" />
 
       {/* Plakat pasangan ala kartu ornate, tanpa foto */}

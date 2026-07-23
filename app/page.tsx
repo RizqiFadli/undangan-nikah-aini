@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import CoverScreen from "@/components/CoverScreen";
+import QuoteSection from "@/components/QuoteSection";
 import CountdownTimer from "@/components/CountdownTimer";
 import CoupleProfile from "@/components/CoupleProfile";
 import LocationMap from "@/components/LocationMap";
@@ -24,6 +25,7 @@ export default function Home() {
 
       {isOpened && (
         <>
+          <QuoteSection />
           <CountdownTimer />
           <CoupleProfile />
           <LocationMap />
