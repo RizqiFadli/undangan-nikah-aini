@@ -21,7 +21,10 @@ const greatVibes = Great_Vibes({
   weight: ["400"],
 });
 
+const SITE_URL = "https://undangannikah-aini-musyafa.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Undangan Pernikahan | Aini & Musyafa'",
   description:
     "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.",
@@ -30,6 +33,22 @@ export const metadata: Metadata = {
     description:
       "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.",
     type: "website",
+    url: SITE_URL,
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Undangan Pernikahan Aini & Musyafa'",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Undangan Pernikahan | Aini & Musyafa'",
+    description:
+      "Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.",
+    images: ["/images/og-image.jpg"],
   },
 };
 
